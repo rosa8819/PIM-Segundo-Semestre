@@ -1,0 +1,400 @@
+#include<stdio.h>
+#include<locale.h>
+#include<string.h>
+#include <windows.h>
+
+void main(){
+
+    int cod,opcao;
+
+    do {
+
+        printf("|------------------------------|\n");
+        printf("|   Informe seu tipo de login  |\n");
+        printf("|------------------------------|\n");
+        printf("| 1-  Administrador            |\n");
+        printf("| 2-  Atendente                |\n");
+        printf("|------------------------------|\n");
+        scanf("%i",&opcao);
+        getchar();
+
+        TelaLogin();
+
+        switch(opcao){
+
+        case 1:
+            MostrarMenuAdm();
+        break;
+
+        case 2:
+            MostrarMenuUse();
+        break;
+
+        default:
+            printf("| Opcao invalida            |\n");
+            printf("| Tente Novamente!          |\n");
+        break;
+    }
+
+    TelaLogin();
+
+    }while(opcao != 0);
+  }
+
+void TelaLogin() {
+  char loginadm[15] = "admin", login1[15], senhadm[15] = "admin", senha1[15], loginuse[15] = "user", senhause[15] = "12345";
+  int login_efetuado = 0, i;
+  do {
+        printf("|--------------------------------------|\n");
+        printf("\n               Login                  \n");
+        printf("|--------------------------------------|\n");
+        printf("\n           Digite o Usuario:          \n");
+        scanf("%s", login1);
+        printf("|--------------------------------------|\n");
+        printf("|             Digite a Senha:          |\n");
+        //scanf("%s", senha1);
+        for(i=0;i<5;i++){
+            senha1[i]=getch();
+            putchar('*');
+        }
+        printf("\n|--------------------------------------|\n");
+
+        if (strcmp(loginadm, login1) == 0 && strcmp(senhadm, senha1) == 0) {
+          printf("\n             Login efetuado com sucesso!    \n\n");
+          fflush(stdin);
+          system("cls");
+          system("PAUSE");
+            }else{
+                if (strcmp(loginuse, login1) == 0 && strcmp(senhause, senha1) == 0) {
+                     printf("\n             Login efetuado com sucesso!    \n\n");
+                     fflush(stdin);
+                     system("cls");
+                     system("PAUSE");
+                        }else{
+                            printf("\nLogin ou Senha invalidos, tente novamente!  \n");
+                        }
+                        system("PAUSE");
+            }
+      } while (login_efetuado != 0);
+
+}
+
+void MostrarMenuAdm(){
+
+//definição da variavel opção
+    int opcao;
+
+//inicio do menu
+    printf(" -------------------------------------------\n");
+    printf("|      SEJA BEM VINDO ADMIN AO SISTEMA      |\n");
+    printf(" ------------------------------------------- \n");
+//opções do menu para o usuario admin
+    printf(" ------------------------------------------- \n");
+    printf("|      (1) - CADASTRO DE CLIENTES           |\n");
+    printf("|      (2) - CADASTRO DE FUNCIONARIOS       |\n");
+    printf("|      (3) - AGENDAMENTOS DE CONSULTAS      |\n");
+    printf("|      (0) - SAIR DO SISTEMA                |\n");
+    printf(" ------------------------------------------- \n");
+    printf("DIGITE A OPCAO DESEJADA: ");// pedindo informações para o usuario
+    scanf("%d", &opcao);//recebendo a opção
+    getchar();
+
+    switch (opcao){
+
+        case 1:
+            CadastroCliente();
+        break;
+
+        case 2:
+            CadastroFuncionario();
+        break;
+
+        case 3:
+            AgendamentoConsulta();
+        break;
+
+        case 0:
+            system ("pause");
+            exit;
+            system("cls");
+        break;
+
+        default: printf("\nOpcao digitada nao e valida");
+        }
+}
+
+void MostrarMenuUse(){
+
+//definição da variavel
+    int opcao;
+
+//inicio do menu
+    printf(" -------------------------------------------\n");
+    printf("|      SEJA BEM VINDO USUARIO AO SISTEMA    |\n");
+    printf(" -------------------------------------------\n\n");
+//opções do menu para usuarios comuns
+    printf(" ------------------------------------------- \n");
+    printf("|      (1) - CADASTRO DE CLIENTES           |\n");
+    printf("|      (2) - AGENDAMENTOS DE CONSULTAS      |\n");
+    printf("|      (0) - SAIR DO SISTEMA                |\n");
+    printf(" ------------------------------------------- \n");
+    printf("DIGITE A OPCAO DESEJADA: ");// pedindo informações para o usuario
+    scanf("%d", &opcao);//recebendo a opção
+    getchar();
+
+    switch (opcao){
+
+        case 1:
+            system("cls");
+            CadastroCliente();
+        break;
+
+        case 2:
+            AgendamentoConsulta();
+        break;
+
+        case 0:
+            system ("pause");
+            system ("cls");
+        break;
+
+        default: printf("\nOpcao digitada nao e valida");
+        }
+
+}
+
+void CadastroCliente(){
+
+//definição das variaveis
+
+    typedef struct{
+        char cod_cliente[3];
+        char nome[15];
+        char data_nascimento[10];
+        char cpf[11];
+        char pet[15];
+        char especie[8];
+        char endereco[150];
+        char telefone [15];
+        }cliente;
+
+        cliente vet_cl[30];
+        char opcao,op;
+        int j = 0;
+        cliente c;
+
+        do {
+
+//inicio e apresentação das informações a ser capturadas
+            printf(" -------------------------------------------\n");
+            printf("|           CADASTRO DE CLIENTES            |\n");
+            printf(" -------------------------------------------\n\n");
+
+            printf("-------------------------------------------- \n");
+            printf("|Qual o codigo do cliente?                   |\n");
+            printf("-------------------------------------------- \n");
+            printf("\n",gets(vet_cl[j].cod_cliente));
+            printf("-------------------------------------------- \n");
+            printf("|Qual o nome do cliente?                    |\n");
+            printf("-------------------------------------------- \n");
+            printf("\n",gets(vet_cl[j].nome));
+            printf("-------------------------------------------- \n");
+            printf("|Qual a data de nascimento (**/**/****)?    |\n");
+            printf("-------------------------------------------- \n");
+            printf("\n",gets(vet_cl[j].data_nascimento));
+            printf("-------------------------------------------- \n");
+            printf("|Qual o CPF do cliente?                     |\n");
+            printf("-------------------------------------------- \n");
+            printf("\n",gets(vet_cl[j].cpf));
+            printf("-------------------------------------------- \n");
+            printf("Qual o nome do pet do cliente?              |\n");
+            printf("-------------------------------------------- \n");
+            printf("\n",gets(vet_cl[j].pet));
+            printf("-------------------------------------------- \n");
+            printf("-------------------------------------------- \n");
+            printf("|Qual a especie do animal?                  |\n");
+            printf("-------------------------------------------- \n");
+            printf("\n",gets(vet_cl[j].especie));
+            printf("-------------------------------------------- \n");
+            printf("Qual o endereco do cliente?                 |\n");
+            printf("-------------------------------------------- \n");
+            printf("\n",gets(vet_cl[j].endereco));
+            printf("-------------------------------------------- \n");
+            printf("Qual o telefone do cliente (** *****-****)? |\n");
+            printf("-------------------------------------------- \n");
+            printf("\n",gets(vet_cl[j].telefone));
+            printf("-------------------------------------------- \n");
+            printf("Cadastro realizado com sucesso!              \n");
+            printf("-------------------------------------------- \n");
+
+            printf("\nDeseja continuar o cadastro? 'S'(Sim) 'N'(Nao)");
+            scanf("%s",&op);
+            fflush(stdin);
+
+        system("pause");
+        system("cls");
+        j++;
+    }while (op != 'N');// && j < 30);
+}
+
+void CadastroFuncionario(){
+
+//definição das variaveis
+
+    typedef struct {
+    char cod_fun[3];
+    char nome[15];
+    char sexo[15];
+    char data_nascimento[11];
+    char ativo[3];
+    char dept[15];
+    char grupo_fun[15];
+    char cpf[11];
+    char endereco[150];
+    char telefone [15];
+    char salario[10];
+    char crmv[11];
+    }func;
+
+        func vet_fun[30];
+        char opcao,op;
+        int j = 0;
+        func f;
+
+        do {
+        
+//inicio e apresentação das informações a ser capturadas
+    printf(" -------------------------------------------\n");
+    printf("|           CADASTRO DOS FUNCIONARIOS       |\n");
+    printf(" -------------------------------------------\n\n");
+
+    printf("-------------------------------------------- \n");
+    printf("|Qual o codigo do funcionario?                |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].cod_fun));
+    printf("-------------------------------------------- \n");
+    printf("|Qual o nome do funcionario?                |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].nome));
+    printf("-------------------------------------------- \n");
+    printf("|Qual o sexo do funcionario?                |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].sexo));
+    printf("-------------------------------------------- \n");
+    printf("Qual e a data de nascimento do funcionario?  |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].data_nascimento));
+    printf("-------------------------------------------- \n");
+    printf("O funcionario está ativo na empresa?        |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].ativo));
+    printf("-------------------------------------------- \n");
+    printf("Qual o departamento do funcionario?         |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].dept));
+    printf("-------------------------------------------- \n");
+    printf("Qual o grupo de trabalho do funcionario?    |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].grupo_fun));
+    printf("-------------------------------------------- \n");
+    printf("Qual o CPF do funcionario?                  |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].cpf));
+    printf("-------------------------------------------- \n");
+    printf("Qual o endereco do funcionario?             |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].endereco));
+    printf("-------------------------------------------- \n");
+    printf("Qual o telefone do funcionario?             |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].telefone));
+    printf("-------------------------------------------- \n");
+    printf("Qual o salario do funcionario?         |\n");
+    printf("-------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].salario));
+    printf("--------------------------------------------- \n");
+    printf("Qual o CRMV do funcionario se for Veterinario?|\n");
+    printf("---------------------------------------------- \n");
+    printf("\n",gets(vet_fun[j].crmv));
+    printf("-------------------------------------------- \n");
+    printf("--------Cadastro efetuado com sucesso!-------\n");
+    printf("-------------------------------------------- \n");
+
+        printf("\nDeseja continuar o cadastro? ");
+                scanf("%s",&op);
+                fflush(stdin);
+
+            system("pause");
+            system("cls");
+            j++;
+    }while (op != 'n' && j < 30);
+}
+
+void AgendamentoConsulta(){
+
+//definição das variaveis
+
+    typedef struct {
+    char cod_cliente[3];
+    char cliente[15];
+    char pet[15];
+    char data_consulta[15];
+    char hora_consulta[5];
+    char valor_consulta[8];
+    char telefone [15];
+    }agenda;
+
+        agenda vet_agenda[30];
+        char opcao,op;
+        int j = 0;
+        agenda a;
+
+        do {
+
+//inicio e apresentação das informações a ser capturadas
+    printf(" ----------------------------------------------- \n");
+    printf("|           Agendamento da Consulta             |\n");
+    printf(" ----------------------------------------------- \n\n");
+
+    printf(" ------------------------------------------------ \n");
+    printf("| Qual o codigo do cliente?                      |\n");
+    printf(" ------------------------------------------------ \n");
+    printf("\n",gets(a.cod_cliente));
+    printf(" ------------------------------------------------ \n");
+    printf("| Qual o nome do cliente?                        |\n");
+    printf(" ------------------------------------------------ \n");
+    printf("\n",gets(a.cliente));
+    printf(" ------------------------------------------------ \n");
+    printf("| Qual o nome do pet do cliente?                 |\n");
+    printf(" ------------------------------------------------ \n");
+    printf("\n",gets(a.pet));
+    printf("-------------------------------------------------- \n");
+    printf("| Qual a data da consulta ?                       |\n");
+    printf("-------------------------------------------------- \n");
+    printf("\n",gets(a.data_consulta));
+    printf("-------------------------------------------------- \n");
+    printf("| Qual a hora da consulta?                        |\n");
+    printf("-------------------------------------------------- \n");
+    printf("\n",gets(a.hora_consulta));
+    printf("-------------------------------------------------- \n");
+    printf("| Qual o valor da consulta ?                       |\n");
+    printf("-------------------------------------------------- \n");
+    printf("\n",gets(a.valor_consulta));
+    printf("-------------------------------------------------- \n");
+    printf("| Qual o telefone do cliente?                      |\n");
+    printf("-------------------------------------------------- \n");
+    printf("\n",gets(a.telefone));
+    printf("-------------------------------------------------- \n");
+    printf("| Cadastro realizado com sucesso                  |\n");
+    printf("-------------------------------------------------- \n");
+
+    printf("\nDeseja continuar o cadastro? ");
+                scanf("%s",&op);
+                fflush(stdin);
+
+            system("pause");
+            system("cls");
+            j++;
+    }while (op != 'n' && j < 30);
+
+}
